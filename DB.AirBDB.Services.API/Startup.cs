@@ -37,7 +37,7 @@ namespace DB.AirBDB.Services.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Usuários", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI AirBDB", Version = "v1" });
                 c.EnableAnnotations();
             });
         }
@@ -48,7 +48,7 @@ namespace DB.AirBDB.Services.API
 
             app.UseSwaggerUI(opt =>
             {
-                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "API Usuários V1");
+                opt.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI AirBDB V1");
                 opt.RoutePrefix = string.Empty;
             });
 

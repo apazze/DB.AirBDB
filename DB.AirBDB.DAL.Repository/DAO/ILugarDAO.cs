@@ -5,10 +5,10 @@ namespace DB.AirBDB.DAL.Repository.DAO
 {
     public interface ILugarDAO
     {
-        void Adicionar(IEnumerable<LugarDTO> place);
-        void Atualizar(LugarDTO place);
-        void Remover(LugarDTO place);
+        void Adicionar(IEnumerable<LugarDTO> lugar);
+        void Atualizar(LugarDTO lugar);
+        void Remover(LugarDTO lugar);
         LugarDTO RecuperaLugarPorId(int id);
-        public IEnumerable<LugarDTO> Filtrar(LugaresFiltroDTO filtro);
+        public IEnumerable<LugarDTO> Filtrar(LugarFiltroDTO filtro);
     }
 }

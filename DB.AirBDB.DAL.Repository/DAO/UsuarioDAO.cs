@@ -16,46 +16,46 @@ namespace DB.AirBDB.DAL.Repository.DAO
             this.contexto = contexto;
             this.mapper = mapper;
         }
-        public void Adicionar(IEnumerable<UsuarioDTO> users)
+        public void Adicionar(IEnumerable<UsuarioDTO> usuarios)
         {
-            IList<User> list = new List<User>();
+            IList<Usuario> list = new List<Usuario>();
 
-            foreach (var item in users)
+            foreach (var item in usuarios)
             {
-                User usuario = mapper.Map<User>(item);
+                Usuario usuario = mapper.Map<Usuario>(item);
 
                 list.Add(usuario);
             }
 
-            contexto.Users.AddRange(list);
+            contexto.Usuarios.AddRange(list);
 
-            var lastId = contexto.Users.OrderBy(i => i.UserId).Select(i => i.UserId).LastOrDefault();
+            var lastId = contexto.Usuarios.OrderBy(i => i.UsuarioId).Select(i => i.UsuarioId).LastOrDefault();
 
             contexto.SaveChanges();
 
-            foreach (var item in users)
+            foreach (var item in usuarios)
             {
-                item.UserId = ++lastId;
+                item.UsuarioId = ++lastId;
             }
 
         }
         public void Atualizar(UsuarioDTO usuarioDTO)
         {
-            User usuario = mapper.Map<User>(usuarioDTO);
+            Usuario usuario = mapper.Map<Usuario>(usuarioDTO);
 
             contexto.ChangeTracker.Clear();
-            contexto.Users.Update(usuario);
+            contexto.Usuarios.Update(usuario);
             contexto.SaveChanges();
         }
         public IList<UsuarioDTO> RecuperaListaDeUsuarios()
         {
             IList<UsuarioDTO> list = new List<UsuarioDTO>();
-            var usuarios = contexto.Users.ToList();
+            var usuarios = contexto.Usuarios.ToList();
 
             foreach (var item in usuarios)
             {
                 var usuarioDTO = mapper.Map<UsuarioDTO>(item);
-                usuarioDTO.Password = null;
+                usuarioDTO.Senha = null;
                 list.Add(usuarioDTO);
             }
 
@@ -63,19 +63,20 @@ namespace DB.AirBDB.DAL.Repository.DAO
         }
         public UsuarioDTO RecuperaUsuarioPorId(int id)
         {
-            var usuario = contexto.Users.Find(id);
+            var usuario = contexto.Usuarios.Find(id);
 
             if (usuario == null)
                 throw new ArgumentException("Id do Usuário não localizado.");
-
+            
+            usuario.Senha = null;
             return mapper.Map<UsuarioDTO>(usuario);
         }
         public void Remover(UsuarioDTO usuarioDTO)
         {
-            User usuario = mapper.Map<User>(usuarioDTO);
+            Usuario usuario = mapper.Map<Usuario>(usuarioDTO);
 
             contexto.ChangeTracker.Clear();
-            contexto.Users.Remove(usuario);
+            contexto.Usuarios.Remove(usuario);
             contexto.SaveChanges();
         }
     }

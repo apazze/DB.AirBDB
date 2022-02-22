@@ -1,4 +1,5 @@
-﻿using DB.AirBDB.Common.Model.DTO;
+﻿using AutoMapper;
+using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.DAL.Repository.DAO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +15,11 @@ namespace DB.AirBDB.Services.API.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly IUsuarioDAO _repoUsuario;
-        public UsuariosController(IUsuarioDAO usuarioDAO)
+        private readonly IMapper _mapper;
+        public UsuariosController(IUsuarioDAO usuarioDAO, IMapper mapper)
         {
             _repoUsuario = usuarioDAO;
+            _mapper = mapper;
         }
 
         [SwaggerOperation(Summary = "Recupera a lista de Usuários.", Tags = new[] { "Usuários" })]
@@ -59,16 +62,24 @@ namespace DB.AirBDB.Services.API.Controllers
 
         [SwaggerOperation(Summary = "Registra uma lista de Usuários na base.", Tags = new[] { "Usuários" })]
         [HttpPost]
-        public IActionResult Post([FromBody] IEnumerable<UsuarioDTO> model)
+        public IActionResult Post([FromBody] IEnumerable<UsuarioPostDTO> model)
         {
             if (ModelState.IsValid)
             {
-                _repoUsuario.Adicionar(model);
+                IList<UsuarioDTO> lista = new List<UsuarioDTO>();
 
                 foreach (var item in model)
                 {
-                    var uri = Url.Action("Get", new { id = item.UserId });
-                    return Created(uri, model);
+                    var usuarioDTO = _mapper.Map<UsuarioDTO>(item);
+                    lista.Add(usuarioDTO);
+                }
+
+                _repoUsuario.Adicionar(lista);
+
+                foreach (var item in lista)
+                {
+                    var uri = Url.Action("Get", new { id = item.UsuarioId });
+                    return Created(uri, item);
                 }
             }
             return BadRequest();
@@ -76,26 +87,25 @@ namespace DB.AirBDB.Services.API.Controllers
 
         [SwaggerOperation(Summary = "Atualiza o Usuário identificado por seu {id}.", Tags = new[] { "Usuários" })]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] UsuarioDTO model)
+        public IActionResult Put(int id, [FromBody] UsuarioPostDTO model)
         {
             if (ModelState.IsValid)
             {
-                UsuarioDTO user;
+                UsuarioDTO usuarioDTO;
 
                 try
                 {
-                    user = _repoUsuario.RecuperaUsuarioPorId(id);
+                    usuarioDTO = _repoUsuario.RecuperaUsuarioPorId(id);
                 }
                 catch (Exception e)
                 {
                     return NotFound(e.Message);
                 }
 
-                user.Name = model.Name;
-                user.Password = model.Password;
-                user.UserName = model.UserName;
+                usuarioDTO = _mapper.Map<UsuarioDTO>(model);
+                usuarioDTO.UsuarioId = id;
 
-                _repoUsuario.Atualizar(user);
+                _repoUsuario.Atualizar(usuarioDTO);
 
                 return Ok();
             }

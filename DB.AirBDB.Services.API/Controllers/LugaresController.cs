@@ -1,4 +1,5 @@
-﻿using DB.AirBDB.Common.Model.DTO;
+﻿using AutoMapper;
+using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.DAL.Repository.DAO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,18 @@ namespace DB.AirBDB.Services.API.Controllers
     public class LugaresController : ControllerBase
     {
         private readonly ILugarDAO _repoLugar;
-        public LugaresController(ILugarDAO repoLugar)
+        private readonly IMapper _mapper;
+        public LugaresController(ILugarDAO repoLugar, IMapper mapper)
         {
             _repoLugar = repoLugar;
+            _mapper = mapper;
         }
 
         [SwaggerOperation(Summary = "Recupera a lista de Lugares.", Tags = new[] { "Lugares" })]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(LugarDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public IActionResult GetListaLugares([FromQuery] LugaresFiltroDTO filtro)
+        public IActionResult GetListaLugares([FromQuery] LugarFiltroDTO filtro)
         {
             IEnumerable<LugarDTO> lista;
 
@@ -60,17 +63,25 @@ namespace DB.AirBDB.Services.API.Controllers
         [SwaggerOperation(Summary = "Registra uma lista de Lugares na base.", Tags = new[] { "Lugares" })]
         [HttpPost]
 
-        public IActionResult Post([FromBody] IEnumerable<LugarDTO> model)
+        public IActionResult Post([FromBody] IEnumerable<LugarPostDTO> model)
         {
 
             if (ModelState.IsValid)
             {
-                _repoLugar.Adicionar(model);
+                IList<LugarDTO> lista = new List<LugarDTO>();
 
                 foreach (var item in model)
                 {
+                    var lugarDTO = _mapper.Map<LugarDTO>(item);
+                    lista.Add(lugarDTO);
+                }
+
+                _repoLugar.Adicionar(lista);
+
+                foreach (var item in lista)
+                {
                     var uri = Url.Action("Get", new { id = item.LugarId });
-                    return Created(uri, model);
+                    return Created(uri, lista);
                 }
             }
 
@@ -79,29 +90,25 @@ namespace DB.AirBDB.Services.API.Controllers
 
         [SwaggerOperation(Summary = "Atualiza o Lugar identificado por seu {id}.", Tags = new[] { "Lugares" })]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] LugarDTO model)
+        public IActionResult Put(int id, [FromBody] LugarPostDTO model)
         {
             if (ModelState.IsValid)
             {
-                LugarDTO lugar;
+                LugarDTO lugarDTO;
 
                 try
                 {
-                    lugar = _repoLugar.RecuperaLugarPorId(id);
+                    lugarDTO = _repoLugar.RecuperaLugarPorId(id);
                 }
                 catch (Exception e)
                 {
                     return NotFound(e.Message);
                 }
 
-                lugar.Descricao = model.Descricao;
-                lugar.TipoDeAcomodacao = model.TipoDeAcomodacao;
-                lugar.Cidade = model.Cidade;
-                lugar.Valor = model.Valor;
-                lugar.Ativo = model.Ativo;
-                lugar.EstadoDaLocacao = model.EstadoDaLocacao;
+                lugarDTO = _mapper.Map<LugarDTO>(model);
+                lugarDTO.LugarId = id;
 
-                _repoLugar.Atualizar(lugar);
+                _repoLugar.Atualizar(lugarDTO);
 
                 return Ok();
             }

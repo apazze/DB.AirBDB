@@ -1,6 +1,6 @@
 ﻿namespace DB.AirBDB.Common.Utils.Enums
 {
-    public enum PlaceStatusLocacao
+    public enum LugarStatusLocacao
     {
         Disponivel,
         Ocupado,

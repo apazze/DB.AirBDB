@@ -20,17 +20,17 @@ namespace DB.AirBDB.DAL.Repository.DAO
         }
         public void Adicionar(IEnumerable<LugarDTO> lugares)
         {
-            IList<Place> list = new List<Place>();
+            IList<Lugar> list = new List<Lugar>();
 
             foreach (var item in lugares)
             {
-                Place place = mapper.Map<Place>(item);
-                list.Add(place);
+                Lugar lugar = mapper.Map<Lugar>(item);
+                list.Add(lugar);
             }
 
-            contexto.Places.AddRange(list);
+            contexto.Lugares.AddRange(list);
 
-            var lastId = contexto.Places.OrderBy(i => i.PlaceId).Select(i => i.PlaceId).LastOrDefault();
+            var lastId = contexto.Lugares.OrderBy(i => i.LugarId).Select(i => i.LugarId).LastOrDefault();
 
             contexto.SaveChanges();
 
@@ -41,15 +41,15 @@ namespace DB.AirBDB.DAL.Repository.DAO
         }
         public void Atualizar(LugarDTO lugarDTO)
         {
-            var lugar = mapper.Map<Place>(lugarDTO);
+            var lugar = mapper.Map<Lugar>(lugarDTO);
 
             contexto.ChangeTracker.Clear();
-            contexto.Places.Update(lugar);
+            contexto.Lugares.Update(lugar);
             contexto.SaveChanges();
         }
         public LugarDTO RecuperaLugarPorId(int id)
         {
-            var lugar = contexto.Places.Where(p => p.PlaceId == id)
+            var lugar = contexto.Lugares.Where(p => p.LugarId == id)
                 .Include(p => p.ListaReservas)
                 .SingleOrDefault();
 
@@ -61,34 +61,34 @@ namespace DB.AirBDB.DAL.Repository.DAO
         }
         public void Remover(LugarDTO lugarDTO)
         {
-            var lugar = mapper.Map<Place>(lugarDTO);
+            var lugar = mapper.Map<Lugar>(lugarDTO);
 
             contexto.ChangeTracker.Clear();
-            contexto.Places.Remove(lugar);
+            contexto.Lugares.Remove(lugar);
             contexto.SaveChanges();
         }
-        public IEnumerable<LugarDTO> Filtrar(LugaresFiltroDTO filtro)
+        public IEnumerable<LugarDTO> Filtrar(LugarFiltroDTO filtro)
         {
             if (filtro != null)
             {
-                var ativos = contexto.Places.Where(p => p.Ativo == true);
+                var ativos = contexto.Lugares.Where(p => p.Ativo == true);
 
                 if (!string.IsNullOrEmpty(filtro.Cidade) && !string.IsNullOrEmpty(filtro.DataInicio) && !string.IsNullOrEmpty(filtro.DataFim))
                 {
                     DateTime dataInicio = DateTime.Parse(filtro.DataInicio);
                     DateTime dataFim = DateTime.Parse(filtro.DataFim);
-                    IList<Place> lugaresDisponiveis = new List<Place>();
+                    IList<Lugar> lugaresDisponiveis = new List<Lugar>();
 
                     var idxDeLugaresNaCidade = ativos
-                        .Where(c => c.City.Contains(filtro.Cidade))
-                        .Select(l => l.PlaceId)
+                        .Where(c => c.Cidade.Contains(filtro.Cidade))
+                        .Select(l => l.LugarId)
                         .ToList();
 
                     if (idxDeLugaresNaCidade != null)
                     {
-                        var idxDeLugaresReservados = contexto.Bookings
+                        var idxDeLugaresReservados = contexto.Reservas
                             .Where(d => dataInicio >= d.DataInicio && dataInicio <= d.DataFim || dataFim >= d.DataInicio && dataFim <= d.DataFim)
-                            .Select(b => b.PlaceId)
+                            .Select(b => b.LugarId)
                             .ToList();
 
                         var idxDeLugaresDisponiveis = idxDeLugaresNaCidade.Except(idxDeLugaresReservados);
@@ -98,7 +98,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                             foreach (var item in idxDeLugaresDisponiveis)
                             {
                                 lugaresDisponiveis.Add(
-                                    ativos.Where(p => p.PlaceId == item)
+                                    ativos.Where(p => p.LugarId == item)
                                     .Include(p => p.ListaReservas)
                                     .SingleOrDefault());
                             }
@@ -111,7 +111,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                 if (!string.IsNullOrEmpty(filtro.Cidade))
                 {
                     var cidades = ativos
-                        .Where(l => l.City.Contains(filtro.Cidade))
+                        .Where(l => l.Cidade.Contains(filtro.Cidade))
                         .Include(l => l.ListaReservas)
                         .ToList();
 
@@ -119,7 +119,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                 }
             }
 
-            var tudo = contexto.Places.Include(p => p.ListaReservas).ToList();
+            var tudo = contexto.Lugares.Include(p => p.ListaReservas).ToList();
 
             return mapper.Map<IList<LugarDTO>>(tudo);
         }

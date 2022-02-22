@@ -5,9 +5,9 @@ namespace DB.AirBDB.DAL.Repository.DAO
 {
     public interface IReservaDAO
     {
-        void Adicionar(IEnumerable<ReservaDTO> bookingDTO);
-        void Atualizar(ReservaDTO bookingDTO);
-        void Remover(ReservaDTO bookingDTO);
+        void Adicionar(IEnumerable<ReservaDTO> reservaDTO);
+        void Atualizar(ReservaDTO reservaDTO);
+        void Remover(ReservaDTO reservaDTO);
         IList<ReservaDTO> RecuperaListaDeReservas();
         ReservaDTO RecuperaReservaPorId(int id);
     }

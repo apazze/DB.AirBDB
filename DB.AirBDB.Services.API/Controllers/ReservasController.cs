@@ -1,4 +1,5 @@
-﻿using DB.AirBDB.Common.Model.DTO;
+﻿using AutoMapper;
+using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.DAL.Repository.DAO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +14,13 @@ namespace DB.AirBDB.Services.API.Controllers
     [ApiExplorerSettings(GroupName = "v1")]
     public class ReservasController : ControllerBase
     {
-
         private readonly IReservaDAO _repoReserva;
-
-        public ReservasController(IReservaDAO repoReserva)
+        private readonly IMapper _mapper;
+        
+        public ReservasController(IReservaDAO repoReserva, IMapper mapper)
         {
             _repoReserva = repoReserva;
+            _mapper = mapper;
         }
 
         [SwaggerOperation(Summary = "Recupera a lista de Reservas.", Tags = new[] { "Reservas" })]
@@ -61,16 +63,24 @@ namespace DB.AirBDB.Services.API.Controllers
 
         [SwaggerOperation(Summary = "Registra uma lista de Reservas na base.", Tags = new[] { "Reservas" })]
         [HttpPost]
-        public IActionResult Post([FromBody] IEnumerable<ReservaDTO> model)
+        public IActionResult Post([FromBody] IEnumerable<ReservaPostDTO> model)
         {
             if (ModelState.IsValid)
             {
-                _repoReserva.Adicionar(model);
+                IList<ReservaDTO> lista = new List<ReservaDTO>();
 
                 foreach (var item in model)
                 {
+                    var reservaDTO = _mapper.Map<ReservaDTO>(item);
+                    lista.Add(reservaDTO);
+                }
+
+                _repoReserva.Adicionar(lista);
+
+                foreach (var item in lista)
+                {
                     var uri = Url.Action("Get", new { id = item.ReservaId });
-                    return Created(uri, model);
+                    return Created(uri, lista);
                 }
             }
 
@@ -79,28 +89,26 @@ namespace DB.AirBDB.Services.API.Controllers
 
         [SwaggerOperation(Summary = "Atualiza a Reserva identificado por seu {id}.", Tags = new[] { "Reservas" })]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ReservaDTO model)
+        public IActionResult Put(int id, [FromBody] ReservaPostDTO model)
         {
 
             if (ModelState.IsValid)
             {
-                ReservaDTO reserva;
+                ReservaDTO reservaDTO;
 
                 try
                 {
-                    reserva = _repoReserva.RecuperaReservaPorId(id);
+                    reservaDTO = _repoReserva.RecuperaReservaPorId(id);
                 }
                 catch (Exception e)
                 {
                     return NotFound(e.Message);
                 }
 
-                reserva.UserId = model.UserId;
-                reserva.LugarId = model.LugarId;
-                reserva.DataInicio = model.DataInicio;
-                reserva.DataFim = model.DataFim;
+                reservaDTO = _mapper.Map<ReservaDTO>(model);
+                reservaDTO.ReservaId = id;
 
-                _repoReserva.Atualizar(reserva);
+                _repoReserva.Atualizar(reservaDTO);
 
                 return Ok();
             }

@@ -1,9 +1,9 @@
-﻿using DB.AirBDB.Common.Utils.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DB.AirBDB.Common.Utils.Enums;
 
-namespace DB.AirBDB.Common.Model.DTO
+namespace DB.AirBDB.DAL.Repository.DatabaseEntity
 {
-    public class LugarDTO
+    internal class Lugar
     {
         public int LugarId { get; set; }
         public string Descricao { get; set; }
@@ -12,6 +12,7 @@ namespace DB.AirBDB.Common.Model.DTO
         public double Valor { get; set; }
         public LugarStatusLocacao StatusLocacao { get; set; } = LugarStatusLocacao.Disponivel;
         public bool Ativo { get; set; } = true;
-        public IList<ReservaDTO> ListaReservas { get; set; }
+        public IList<Reserva> ListaReservas { get; set; }
+
     }
 }

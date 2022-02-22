@@ -1,7 +1,7 @@
 ﻿namespace DB.AirBDB.Common.Model.DTO
 {
 
-    public class LugaresFiltroDTO
+    public class LugarFiltroDTO
     {
         public string Cidade { get; set; }
         public string DataInicio { get; set; }

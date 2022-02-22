@@ -27,61 +27,61 @@ namespace DB.AirBDB.DAL.Repository
             void SeedEntity<T>(T[] seedData) where T : class
                 => modelBuilder.Entity<T>().HasData(seedData);
 
-            User[] UserSeed()
+            Usuario[] UserSeed()
             {
-                User[] usersSeed = new User[]
+                Usuario[] usersSeed = new Usuario[]
                 {
-                    new User
+                    new Usuario
                     {
-                        UserId = 1,
-                        UserName = "caio_martins",
-                        Name = "Caio César Martins",
-                        Password = "P4$$W0RDseguro"
+                        UsuarioId = 1,
+                        Login = "caio_martins",
+                        Nome = "Caio César Martins",
+                        Senha = "P4$$W0RDseguro"
                     },
-                    new User
+                    new Usuario
                     {
-                        UserId = 2,
-                        UserName = "alisson_pazze",
-                        Name = "Alisson dos Santos Pazze",
-                        Password = "P4$$W0RDmaisS3GUR0"
+                        UsuarioId = 2,
+                        Login = "alisson_pazze",
+                        Nome = "Alisson dos Santos Pazze",
+                        Senha = "P4$$W0RDmaisS3GUR0"
                     }
                 };
 
                 return usersSeed;
             }
 
-            Place[] PlaceSeed()
+            Lugar[] PlaceSeed()
             {
-                Place[] placesSeed = new Place[]
+                Lugar[] placesSeed = new Lugar[]
                 {
-                    new Place
+                    new Lugar
                     {
-                        PlaceId = 1,
-                        Description = "Casa a 3 quadras do mar",
-                        AccomodationType = "Casa",
-                        City = "Tramandaí",
-                        Value = 250
+                        LugarId = 1,
+                        Descricao = "Casa a 3 quadras do mar",
+                        TipoDeAcomodacao = "Casa",
+                        Cidade = "Tramandaí",
+                        Valor = 250
                     },
-                    new Place
+                    new Lugar
                     {
-                        PlaceId = 2,
-                        Description = "Apartamento no bairro Cidade Baixa",
-                        AccomodationType = "Apartamento",
-                        City = "Porto Alegre",
-                        Value = 500
+                        LugarId = 2,
+                        Descricao = "Apartamento no bairro Cidade Baixa",
+                        TipoDeAcomodacao = "Apartamento",
+                        Cidade = "Porto Alegre",
+                        Valor = 500
                     }
                 };
 
                 return placesSeed;
             }
 
-            Booking[] BookingSeed()
+            Reserva[] BookingSeed()
             {
-                Booking[] bookingsSeed = new Booking[]
+                Reserva[] bookingsSeed = new Reserva[]
                 {
-                    new Booking
+                    new Reserva
                     {
-                        BookingId = 1,
+                        ReservaId = 1,
                         DataInicio = new DateTime(2022, 1, 1, 00, 00, 01),
                         DataFim = new DateTime(2022, 1, 10, 23, 59, 59)
                     }
@@ -96,9 +96,9 @@ namespace DB.AirBDB.DAL.Repository
 
         #region ENTITIES
 
-        internal DbSet<User> Users { get; set; }
-        internal DbSet<Place> Places { get; set; }
-        internal DbSet<Booking> Bookings { get; set; }
+        internal DbSet<Usuario> Usuarios { get; set; }
+        internal DbSet<Lugar> Lugares { get; set; }
+        internal DbSet<Reserva> Reservas { get; set; }
 
         #endregion
     }
