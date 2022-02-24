@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("DB.AirBDB.DAL.RepositoryTests")]
 namespace DB.AirBDB.DAL.Repository.DatabaseEntity
 {
     internal class Reserva

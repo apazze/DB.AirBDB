@@ -1,5 +1,7 @@
+using DB.AirBDB.Common.Utils;
 using DB.AirBDB.DAL.Repository;
 using DB.AirBDB.DAL.Repository.DAO;
+using DB.AirBDB.Services.API.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +29,12 @@ namespace DB.AirBDB.Services.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            var section = Configuration.GetSection(nameof(ReservasConfiguration));
+            var reservasConfiguration = section.Get<ReservasConfiguration>();
+
             services.AddSingleton<AppDBContext>();
+            services.AddSingleton(reservasConfiguration);
+            services.AddSingleton<ValidadorDeDatas>();
 
             services.AddTransient<IUsuarioDAO, UsuarioDAO>();
             services.AddTransient<ILugarDAO, LugarDAO>();
@@ -40,6 +47,8 @@ namespace DB.AirBDB.Services.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPI AirBDB", Version = "v1" });
                 c.EnableAnnotations();
             });
+
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

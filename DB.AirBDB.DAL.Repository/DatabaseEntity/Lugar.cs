@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using DB.AirBDB.Common.Utils.Enums;
 
+[assembly: InternalsVisibleToAttribute("DB.AirBDB.DAL.RepositoryTests")]
 namespace DB.AirBDB.DAL.Repository.DatabaseEntity
 {
     internal class Lugar

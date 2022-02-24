@@ -1,4 +1,5 @@
 ﻿using DB.AirBDB.Common.Model.DTO;
+using System;
 using System.Collections.Generic;
 
 namespace DB.AirBDB.DAL.Repository.DAO
@@ -10,5 +11,6 @@ namespace DB.AirBDB.DAL.Repository.DAO
         void Remover(ReservaDTO reservaDTO);
         IList<ReservaDTO> RecuperaListaDeReservas();
         ReservaDTO RecuperaReservaPorId(int id);
+        bool VerificaDisponibilidadeDoLugarNoPeriodo(ReservaDTO reservas);
     }
 }
