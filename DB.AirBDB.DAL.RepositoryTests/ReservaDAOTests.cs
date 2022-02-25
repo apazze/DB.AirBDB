@@ -16,83 +16,116 @@ using Xunit;
 
 namespace DB.AirBDB.DAL.RepositoryTests
 {
-    //public class ReservaDAOTests
-    //{
-    //    [Fact]
-    //    public void ValidarReserva_NaoDevePermitirReservaEmPeriodoJaReservadoParaMesmoLugar_RetornaTrue()
-    //    {
-    //        // Arrange
+    public class ReservaDAOTests
+    {
+        [Fact]
+        public void ValidarReserva_NaoDevePermitirReservaEmPeriodoJaReservadoParaMesmoLugar_RetornaTrue_EstaDisponivel_DatasNaoConflitam()
+        {
+            // Arrange
 
-    //        //var mock = new Mock<IReservaDAO>();
+            var options = new DbContextOptionsBuilder<AppDBContext>().UseInMemoryDatabase("DubleAppDBContext").Options;
 
-    //        //mock.Setup(r => r.Adicionar(It.IsAny<ReservaDTO[]>()));
+            var contexto = new AppDBContext(options);
 
-    //        //var repo = mock.Object;
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Reserva, ReservaDTO>().ReverseMap());
 
-    //        //repo.Adicionar();
+            var mapper = config.CreateMapper();
 
-    //        //Mock<AppDBContext> mockAppDBContext = new Mock<AppDBContext>();
-    //        //mockAppDBContext.Setup(x => x.Reservas).Returns(MockReservas(listaDeReservasMock));
+            var reservasConfig = new ReservasConfiguration();
+            var validadorDatas = new ValidadorDeDatas();
 
-    //        //======================================================================
+            IReservaDAO reserva = new ReservaDAO(contexto, mapper, reservasConfig, validadorDatas);
 
-    //        AppDBContext contexto = new AppDBContext();
 
-    //        var config = new MapperConfiguration(cfg => cfg.CreateMap<Reserva, ReservaDTO>().ReverseMap());
+            IEnumerable<ReservaDTO> primeiraReserva = new List<ReservaDTO>()
+            {
+                    new ReservaDTO
+                    {
+                        UsuarioId = 1,
+                        LugarId = 1,
+                        DataInicio = new DateTime(2022, 3, 25, 15, 30, 30),
+                        DataFim = new DateTime(2022, 4, 20, 15, 30, 30)
+                    }
+            };
+
+            reserva.Adicionar(primeiraReserva);
+
+            IEnumerable<ReservaDTO> segundaReserva = new List<ReservaDTO>()
+            {
+                    new ReservaDTO
+                    {
+                        UsuarioId = 1,
+                        LugarId = 1,
+                        DataInicio = new DateTime(2022, 4, 25, 15, 30, 30),
+                        DataFim = new DateTime(2022, 5, 25, 15, 30, 30)
+                    }
+            };
+
+            bool result = false;
+
+            // Act
+
+            foreach (var item in segundaReserva)
+            {
+                result = reserva.VerificaDisponibilidadeDoLugarNoPeriodo(item);
+            }
             
-    //        var mapper = config.CreateMapper();
+            // Assert
 
-    //        var reservasConfig = new ReservasConfiguration();
-    //        var validadorDatas = new ValidadorDeDatas();
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void ValidarReserva_NaoDevePermitirReservaEmPeriodoJaReservadoParaMesmoLugar_RetornaFalse_EstaOcupado_DatasConflitam()
+        {
+            // Arrange
+
+            var options = new DbContextOptionsBuilder<AppDBContext>().UseInMemoryDatabase("DubleAppDBContext").Options;
+
+            var contexto = new AppDBContext(options);
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Reserva, ReservaDTO>().ReverseMap());
+
+            var mapper = config.CreateMapper();
+
+            var reservasConfig = new ReservasConfiguration();
+            var validadorDatas = new ValidadorDeDatas();
+
+            IReservaDAO reserva = new ReservaDAO(contexto, mapper, reservasConfig, validadorDatas);
 
 
-    //        List<Reserva> listaDeReservasMock = new List<Reserva>();
+            IEnumerable<ReservaDTO> primeiraReserva = new List<ReservaDTO>()
+            {
+                    new ReservaDTO
+                    {
+                        UsuarioId = 1,
+                        LugarId = 1,
+                        DataInicio = new DateTime(2024, 4, 25, 15, 30, 30),
+                        DataFim = new DateTime(2024, 5, 25, 15, 30, 30)
+                    }
+            };
 
+            reserva.Adicionar(primeiraReserva);
 
-    //        IReservaDAO reserva = new ReservaDAO(contexto, mapper, reservasConfig, validadorDatas);
+            IEnumerable<ReservaDTO> segundaReserva = new List<ReservaDTO>()
+            {
+                    new ReservaDTO
+                    {
+                        UsuarioId = 1,
+                        LugarId = 1,
+                        DataInicio = new DateTime(2024, 4, 25, 15, 30, 30),
+                        DataFim = new DateTime(2024, 5, 25, 15, 30, 30)
+                    }
+            };
 
-    //        IEnumerable<ReservaDTO> primeiraReserva = new List<ReservaDTO>()
-    //        {
-    //                new ReservaDTO
-    //                {
-    //                    UsuarioId = 1,
-    //                    LugarId = 1,
-    //                    DataInicio = new DateTime(2022, 2, 25, 15, 30, 30),
-    //                    DataFim = new DateTime(2022, 3, 25, 15, 30, 30)
-    //                }
-    //        };
+            // Act
+            //Assert
+            foreach (var item in segundaReserva)
+            {
+                Assert.Throws<ArgumentException>(() => reserva.VerificaDisponibilidadeDoLugarNoPeriodo(item));
+            }
 
-    //        reserva.Adicionar(primeiraReserva);
+        }
 
-    //        //IEnumerable<ReservaDTO> segundaReserva = new List<ReservaDTO>()
-    //        //{
-    //        //        new ReservaDTO
-    //        //        {
-    //        //            ReservaId = 11,
-    //        //            UsuarioId = 1,
-    //        //            LugarId = 1,
-    //        //            DataInicio = new DateTime(2022, 2, 30, 15, 30, 30),
-    //        //            DataFim = new DateTime(2022, 3, 30, 15, 30, 30),
-    //        //        }
-    //        //};
-
-    //        //IEnumerable<ReservaDTO> segundaReserva = new List<ReservaDTO>();
-    //        ReservaDTO segundaReserva = null;
-
-    //        // Act
-    //        bool result = reserva.VerificaDisponibilidadeDoLugarNoPeriodo(segundaReserva);
-            
-    //        // Assert
-    //        result.Should().BeTrue();
-    //    }
-
-    //    //private static DbSet<Reserva> MockReservas<Reserva>(IEnumerable<Reserva> listaDeReservas) where Reserva : class
-    //    //{
-    //    //    IQueryable<Reserva> listaQueryable = listaDeReservas.AsQueryable();
-    //    //    Mock<DbSet<Reserva>> dbSetMock = new Mock<DbSet<Reserva>>();
-    //    //    dbSetMock.Setup(x => x.Select(x => x)).Returns(listaQueryable);
-
-    //    //    return dbSetMock.Object;
-    //    //}
-    //}
+    }
 }

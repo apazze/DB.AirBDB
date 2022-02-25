@@ -10,10 +10,14 @@ namespace DB.AirBDB.DAL.Repository
         public AppDBContext()
         {
         }
+        public AppDBContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AirBDB-Database");
+            if (!optionsBuilder.IsConfigured)
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AirBDB-Database");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
