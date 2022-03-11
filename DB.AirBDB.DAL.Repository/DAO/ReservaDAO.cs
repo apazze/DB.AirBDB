@@ -3,7 +3,6 @@ using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.Common.Utils;
 using DB.AirBDB.DAL.Repository.DatabaseEntity;
 using DB.AirBDB.Services.API.Configuration;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +16,14 @@ namespace DB.AirBDB.DAL.Repository.DAO
         private readonly ReservasConfiguration reservasConfiguration;
         private readonly ValidadorDeDatas validadorDeDatas;
         public TimeSpan IntervaloPermitido { get; }
+        public TimeSpan IntervaloMaximo { get; }
         public ReservaDAO(AppDBContext contexto, IMapper mapper, ReservasConfiguration reservasConfiguration, ValidadorDeDatas validadorDeDatas)
         {
             this.contexto = contexto;
             this.mapper = mapper;
             this.reservasConfiguration = reservasConfiguration;
             IntervaloPermitido = new TimeSpan(reservasConfiguration.IntervaloMinimoPermitidoEmDias, 0, 0, 0);
+            IntervaloMaximo = new TimeSpan(reservasConfiguration.IntervaloMaximoPermitidoEmDias, 0, 0, 0);
             this.validadorDeDatas = validadorDeDatas;
         }
         public void Adicionar(IEnumerable<ReservaDTO> reservas)
@@ -35,8 +36,11 @@ namespace DB.AirBDB.DAL.Repository.DAO
                 {
                     if (VerificaDisponibilidadeDoLugarNoPeriodo(item))
                     {
-                        Reserva reserva = mapper.Map<Reserva>(item);
-                        list.Add(reserva);
+                        if(ValidarChavesEstrangeiras(item))
+                        {
+                            Reserva reserva = mapper.Map<Reserva>(item);
+                            list.Add(reserva);
+                        }
                     }
                 }
             }
@@ -53,7 +57,6 @@ namespace DB.AirBDB.DAL.Repository.DAO
             }
 
         }
-
         public void Atualizar(ReservaDTO reservaDTO)
         {
             var reserva = mapper.Map<Reserva>(reservaDTO);
@@ -98,7 +101,12 @@ namespace DB.AirBDB.DAL.Repository.DAO
         }
         private bool ValidarDatas(ReservaDTO reservaDTO)
         {
-            if(!validadorDeDatas.DataEhAtualOuFutura(reservaDTO.DataInicio, reservaDTO.DataFim))
+            if(!validadorDeDatas.ValidaDataFuturaMaxima(reservaDTO.DataInicio, reservaDTO.DataFim, IntervaloMaximo))
+            {
+                throw new ArgumentException($"Data é superior ao limite de {reservasConfiguration.IntervaloMaximoPermitidoEmDias} dia(s).");
+            }
+
+            if (!validadorDeDatas.DataEhAtualOuFutura(reservaDTO.DataInicio, reservaDTO.DataFim))
             {
                 throw new ArgumentException("Data incoerente.");
             }
@@ -124,5 +132,26 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
             return true;
         }
+        public bool ValidarChavesEstrangeiras(ReservaDTO reserva)
+        {
+            var buscaUsuario = contexto.Usuarios
+                .Where(r => r.UsuarioId == reserva.UsuarioId).FirstOrDefault();
+            
+            if (buscaUsuario == null)
+            {
+                throw new ArgumentException("Id do Usuario não encontrado.");
+            }
+
+            var buscaLugar = contexto.Lugares
+                .Where(r => r.LugarId == reserva.LugarId).FirstOrDefault();
+            
+            if (buscaLugar == null)
+            {
+                throw new ArgumentException("Id do Lugar não encontrado.");
+            }
+
+            return true;
+        }
+
     }
 }

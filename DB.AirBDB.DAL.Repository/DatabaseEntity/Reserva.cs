@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleToAttribute("DB.AirBDB.DAL.RepositoryTests")]
+[assembly: InternalsVisibleToAttribute("DynamicProxyGenAssembly2")]
+
 namespace DB.AirBDB.DAL.Repository.DatabaseEntity
 {
     internal class Reserva

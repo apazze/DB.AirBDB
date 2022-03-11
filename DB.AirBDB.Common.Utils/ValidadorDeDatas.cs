@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DB.AirBDB.Common.Utils
 {
@@ -13,7 +9,6 @@ namespace DB.AirBDB.Common.Utils
         public ValidadorDeDatas()
         {
             DataAtual = DateTime.Now;
-
         }
 
         public bool DataEhAtualOuFutura(DateTime inicio, DateTime fim)
@@ -24,6 +19,11 @@ namespace DB.AirBDB.Common.Utils
         public bool ValidaIntervaloMinimo(DateTime dataInicial, DateTime dataFinal, TimeSpan intervaloPermitido)
         {
             return (dataFinal - dataInicial) >= intervaloPermitido;
+        }
+
+        public bool ValidaDataFuturaMaxima(DateTime dataInicio, DateTime dataFim, TimeSpan intervaloMaximo)
+        {
+            return (dataInicio - DataAtual <= intervaloMaximo) && (dataFim - DataAtual <= intervaloMaximo);
         }
     }
 }

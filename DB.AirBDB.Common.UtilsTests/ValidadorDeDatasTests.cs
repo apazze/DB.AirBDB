@@ -71,5 +71,36 @@ namespace DB.AirBDB.Common.UtilsTests
             //Assert
             result.Should().BeFalse();
         }
+
+        [Fact]
+        public void ValidarData_DatasAlemDoIntervaloMaximo_RetornaTrue()
+        {
+            // Arrange
+            DateTime dataInicial = new DateTime(2022, 12, 22, 10, 09, 00);
+            DateTime dataFinal = new DateTime(2022, 12, 23, 10, 08, 59);
+            TimeSpan intervaloPermitido = new TimeSpan(365, 0, 0, 0);
+            ValidadorDeDatas sut = new ValidadorDeDatas();
+
+            //Act
+            bool result = sut.ValidaDataFuturaMaxima(dataInicial, dataFinal, intervaloPermitido);
+
+            //Assert
+            result.Should().BeTrue();
+        }
+        [Fact]
+        public void ValidarData_DatasAlemDoIntervaloMaximo_RetornaFalse()
+        {
+            // Arrange
+            DateTime dataInicial = new DateTime(2023, 12, 22, 10, 09, 00);
+            DateTime dataFinal = new DateTime(2023, 12, 23, 10, 08, 59);
+            TimeSpan intervaloPermitido = new TimeSpan(365, 0, 0, 0);
+            ValidadorDeDatas sut = new ValidadorDeDatas();
+
+            //Act
+            bool result = sut.ValidaDataFuturaMaxima(dataInicial, dataFinal, intervaloPermitido);
+
+            //Assert
+            result.Should().BeFalse();
+        }
     }
 }
