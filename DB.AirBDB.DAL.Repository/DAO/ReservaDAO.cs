@@ -32,16 +32,10 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
             foreach (var item in reservas)
             {
-                if (ValidarDatas(item))
+                if(ReservaValidations(item))
                 {
-                    if (VerificaDisponibilidadeDoLugarNoPeriodo(item))
-                    {
-                        if(ValidarChavesEstrangeiras(item))
-                        {
-                            Reserva reserva = mapper.Map<Reserva>(item);
-                            list.Add(reserva);
-                        }
-                    }
+                    Reserva reserva = mapper.Map<Reserva>(item);
+                    list.Add(reserva);
                 }
             }
 
@@ -57,13 +51,22 @@ namespace DB.AirBDB.DAL.Repository.DAO
             }
 
         }
+
+        private bool ReservaValidations(ReservaDTO item)
+        {
+            return ValidarDatas(item) &&
+                VerificaDisponibilidadeDoLugarNoPeriodo(item) &&
+                ValidarChavesEstrangeiras(item) &&
+                ValidarDisponibilidadeDoUsuario(item);
+        }
+
         public void Atualizar(ReservaDTO reservaDTO)
         {
             var reserva = mapper.Map<Reserva>(reservaDTO);
 
             contexto.ChangeTracker.Clear();
 
-            if (ValidarDatas(reservaDTO))
+            if (ReservaValidations(reservaDTO))
             {
                 contexto.Reservas.Update(reserva);
                 contexto.SaveChanges();
@@ -119,11 +122,11 @@ namespace DB.AirBDB.DAL.Repository.DAO
             return true;
         }
         
-        public bool VerificaDisponibilidadeDoLugarNoPeriodo(ReservaDTO reserva)
+        public bool VerificaDisponibilidadeDoLugarNoPeriodo(ReservaDTO reservaDTO)
         {
             var buscaReservas = contexto.Reservas
-                .Where(r => r.LugarId == reserva.LugarId)
-                .Where(r => reserva.DataInicio >= r.DataInicio && reserva.DataInicio <= r.DataFim || reserva.DataFim >= r.DataInicio && reserva.DataFim <= r.DataFim).FirstOrDefault();
+                .Where(r => r.LugarId == reservaDTO.LugarId)
+                .Where(r => reservaDTO.DataInicio >= r.DataInicio && reservaDTO.DataInicio <= r.DataFim || reservaDTO.DataFim >= r.DataInicio && reservaDTO.DataFim <= r.DataFim).FirstOrDefault();
 
             if(buscaReservas != null)
             {
@@ -132,6 +135,20 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
             return true;
         }
+        public bool ValidarDisponibilidadeDoUsuario(ReservaDTO reservaDTO)
+        {
+            var buscaReservasDoUsuario = contexto.Reservas
+                .Where(r => r.UsuarioId == reservaDTO.UsuarioId)
+                .Where(r => reservaDTO.DataInicio >= r.DataInicio && reservaDTO.DataInicio <= r.DataFim || reservaDTO.DataFim >= r.DataInicio && reservaDTO.DataFim <= r.DataFim).FirstOrDefault();
+
+            if(buscaReservasDoUsuario != null)
+            {
+                throw new ArgumentException("O usuario já possui uma reserva no período.");
+            }
+
+            return true;
+        }
+
         public bool ValidarChavesEstrangeiras(ReservaDTO reserva)
         {
             var buscaUsuario = contexto.Usuarios

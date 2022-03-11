@@ -19,15 +19,15 @@ namespace DB.AirBDB.DAL.RepositoryTests
         public void RecuperaLugares_FiltroPorCidade()
         {
             //Assert
-            var lugares = new ListaDeLugares();
+            var lista = new ListasFake();
 
             var contextMock = new Mock<AppDBContext>();
-            contextMock.Object.Lugares = CreateDbSetMock(lugares.Lugares).Object;
+            contextMock.Object.Lugares = CreateDbSetMock(lista.Lugares).Object;
 
-            var configReserva = new MapperConfiguration(cfg => cfg.CreateMap<Lugar, LugarDTO>().ReverseMap());
-            var mapperReserva = configReserva.CreateMapper();
+            var configLugar = new MapperConfiguration(cfg => cfg.CreateMap<Lugar, LugarDTO>().ReverseMap());
+            var mapperLugar = configLugar.CreateMapper();
 
-            ILugarDAO sut = new LugarDAO(contextMock.Object, mapperReserva);
+            ILugarDAO sut = new LugarDAO(contextMock.Object, mapperLugar);
 
             LugarFiltroDTO filtro = new LugarFiltroDTO() { Cidade = "Porto Alegre" };
 
@@ -42,15 +42,15 @@ namespace DB.AirBDB.DAL.RepositoryTests
             }
         }
 
-        private static Mock<DbSet<Lugar>> CreateDbSetMock<Lugar>(IEnumerable<Lugar> elements) where Lugar : class
+        private static Mock<DbSet<T>> CreateDbSetMock<T>(IEnumerable<T> elements) where T : class
         {
             var elementsAsQueryable = elements.AsQueryable();
-            var dbSetMock = new Mock<DbSet<Lugar>>();
+            var dbSetMock = new Mock<DbSet<T>>();
 
-            dbSetMock.As<IQueryable<Lugar>>().Setup(m => m.Provider).Returns(elementsAsQueryable.Provider);
-            dbSetMock.As<IQueryable<Lugar>>().Setup(m => m.Expression).Returns(elementsAsQueryable.Expression);
-            dbSetMock.As<IQueryable<Lugar>>().Setup(m => m.ElementType).Returns(elementsAsQueryable.ElementType);
-            dbSetMock.As<IQueryable<Lugar>>().Setup(m => m.GetEnumerator()).Returns(elementsAsQueryable.GetEnumerator());
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.Provider).Returns(elementsAsQueryable.Provider);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.Expression).Returns(elementsAsQueryable.Expression);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(elementsAsQueryable.ElementType);
+            dbSetMock.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(elementsAsQueryable.GetEnumerator());
 
             return dbSetMock;
         }
