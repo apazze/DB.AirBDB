@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.DAL.Repository.DAO;
+using DB.AirBDB.Services.API.Erros;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -80,18 +81,17 @@ namespace DB.AirBDB.Services.API.Controllers
                 }
                 catch (ArgumentException e)
                 {
-
                     return BadRequest(e.Message);
                 }
 
-                foreach (var item in lista)
+            foreach (var item in lista)
                 {
                     var uri = Url.Action("Get", new { id = item.ReservaId });
                     return Created(uri, lista);
                 }
             }
 
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
 
         [SwaggerOperation(Summary = "Atualiza a Reserva identificado por seu {id}.", Tags = new[] { "Reservas" })]
@@ -119,7 +119,7 @@ namespace DB.AirBDB.Services.API.Controllers
 
                 return Ok();
             }
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
 
         [SwaggerOperation(Summary = "Remove a Reserva identificado por seu {id}.", Tags = new[] { "Reservas" })]
@@ -143,7 +143,7 @@ namespace DB.AirBDB.Services.API.Controllers
                 return NoContent();
             }
 
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
     }
 }

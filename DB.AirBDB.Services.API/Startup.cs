@@ -2,8 +2,10 @@ using DB.AirBDB.Common.Utils;
 using DB.AirBDB.DAL.Repository;
 using DB.AirBDB.DAL.Repository.DAO;
 using DB.AirBDB.Services.API.Configuration;
+using DB.AirBDB.Services.API.Filtros;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,7 +50,16 @@ namespace DB.AirBDB.Services.API
                 c.EnableAnnotations();
             });
 
-            
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ErrorResponseFilter));
+            });
+            services.Configure<ApiBehaviorOptions>(options => 
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -38,7 +38,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                     list.Add(reserva);
                 }
             }
-
+            contexto.ChangeTracker.Clear();
             contexto.Reservas.AddRange(list);
 
             var lastId = contexto.Reservas.OrderBy(i => i.ReservaId).Select(i => i.ReservaId).LastOrDefault();

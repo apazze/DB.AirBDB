@@ -27,7 +27,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                 Lugar lugar = mapper.Map<Lugar>(item);
                 list.Add(lugar);
             }
-
+            contexto.ChangeTracker.Clear();
             contexto.Lugares.AddRange(list);
 
             var lastId = contexto.Lugares.OrderBy(i => i.LugarId).Select(i => i.LugarId).LastOrDefault();

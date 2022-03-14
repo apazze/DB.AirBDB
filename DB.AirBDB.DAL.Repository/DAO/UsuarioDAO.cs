@@ -27,6 +27,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
                 list.Add(usuario);
             }
 
+            contexto.ChangeTracker.Clear();
             contexto.Usuarios.AddRange(list);
 
             var lastId = contexto.Usuarios.OrderBy(i => i.UsuarioId).Select(i => i.UsuarioId).LastOrDefault();

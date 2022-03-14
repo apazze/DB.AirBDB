@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DB.AirBDB.Common.Model.DTO;
 using DB.AirBDB.DAL.Repository.DAO;
+using DB.AirBDB.Services.API.Erros;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -82,7 +83,7 @@ namespace DB.AirBDB.Services.API.Controllers
                     return Created(uri, item);
                 }
             }
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
 
         [SwaggerOperation(Summary = "Atualiza o Usuário identificado por seu {id}.", Tags = new[] { "Usuários" })]
@@ -109,7 +110,7 @@ namespace DB.AirBDB.Services.API.Controllers
 
                 return Ok();
             }
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
 
         [SwaggerOperation(Summary = "Remove o Usuário identificado por seu {id}.", Tags = new[] { "Usuários" })]
@@ -132,7 +133,7 @@ namespace DB.AirBDB.Services.API.Controllers
                 _repoUsuario.Remover(usuario);
                 return NoContent();
             }
-            return BadRequest();
+            return BadRequest(ErrorResponse.FromModelState(ModelState));
         }
     }
 }
