@@ -10,5 +10,6 @@ namespace DB.AirBDB.DAL.Repository.DAO
         void Remover(UsuarioDTO usuario);
         IList<UsuarioDTO> RecuperaListaDeUsuarios();
         UsuarioDTO RecuperaUsuarioPorId(int id);
+        bool ValidaAlfanumericos(UsuarioDTO usuario);
     }
 }

@@ -4,6 +4,7 @@ using DB.AirBDB.DAL.Repository.DatabaseEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DB.AirBDB.DAL.Repository.DAO
 {
@@ -79,6 +80,17 @@ namespace DB.AirBDB.DAL.Repository.DAO
             contexto.ChangeTracker.Clear();
             contexto.Usuarios.Remove(usuario);
             contexto.SaveChanges();
+        }
+
+        public bool ValidaAlfanumericos(UsuarioDTO usuarioDTO)
+        {
+            return EhAlfaNumerico(usuarioDTO.Login);
+        }
+
+        public static bool EhAlfaNumerico(string strToCheck)
+        {
+            Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
+            return rg.IsMatch(strToCheck);
         }
     }
 }
