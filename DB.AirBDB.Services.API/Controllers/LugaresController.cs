@@ -77,7 +77,14 @@ namespace DB.AirBDB.Services.API.Controllers
                     lista.Add(lugarDTO);
                 }
 
-                _repoLugar.Adicionar(lista);
+                try
+                {
+                    _repoLugar.Adicionar(lista);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
                 foreach (var item in lista)
                 {
@@ -109,7 +116,14 @@ namespace DB.AirBDB.Services.API.Controllers
                 lugarDTO = _mapper.Map<LugarDTO>(model);
                 lugarDTO.LugarId = id;
 
-                _repoLugar.Atualizar(lugarDTO);
+                try
+                {
+                    _repoLugar.Atualizar(lugarDTO);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
                 return Ok();
             }

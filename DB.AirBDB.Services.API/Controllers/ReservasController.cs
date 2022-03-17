@@ -75,8 +75,15 @@ namespace DB.AirBDB.Services.API.Controllers
                     var reservaDTO = _mapper.Map<ReservaDTO>(item);
                     lista.Add(reservaDTO);
                 }
-                
-                _repoReserva.Adicionar(lista);
+
+                try
+                {
+                    _repoReserva.Adicionar(lista);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
                 foreach (var item in lista)
                 {
@@ -109,7 +116,14 @@ namespace DB.AirBDB.Services.API.Controllers
                 reservaDTO = _mapper.Map<ReservaDTO>(model);
                 reservaDTO.ReservaId = id;
 
-                _repoReserva.Atualizar(reservaDTO);
+                try
+                {
+                    _repoReserva.Atualizar(reservaDTO);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
                 return Ok();
             }

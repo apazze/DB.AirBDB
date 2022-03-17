@@ -75,7 +75,14 @@ namespace DB.AirBDB.Services.API.Controllers
                     lista.Add(usuarioDTO);
                 }
 
-                _repoUsuario.Adicionar(lista);
+                try
+                {
+                    _repoUsuario.Adicionar(lista);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
 
                 foreach (var item in lista)
                 {
@@ -106,7 +113,15 @@ namespace DB.AirBDB.Services.API.Controllers
                 usuarioDTO = _mapper.Map<UsuarioDTO>(model);
                 usuarioDTO.UsuarioId = id;
 
-                _repoUsuario.Atualizar(usuarioDTO);
+                try
+                {
+                    _repoUsuario.Atualizar(usuarioDTO);
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+
 
                 return Ok();
             }
