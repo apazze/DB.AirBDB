@@ -130,7 +130,7 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
             if(buscaReservas != null)
             {
-                throw new ArgumentException("Data indisponível para a reserva.");
+                throw new ArgumentException("Data indisponível para a reserva para o Lugar.");
             }
 
             return true;

@@ -23,9 +23,11 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
             foreach (var item in usuarios)
             {
-                Usuario usuario = mapper.Map<Usuario>(item);
-
-                list.Add(usuario);
+                if (UsuarioValidations(item))
+                {
+                    Usuario usuario = mapper.Map<Usuario>(item);
+                    list.Add(usuario);
+                }
             }
 
             contexto.ChangeTracker.Clear();
@@ -41,13 +43,22 @@ namespace DB.AirBDB.DAL.Repository.DAO
             }
 
         }
+        private bool UsuarioValidations(UsuarioDTO item)
+        {
+            return ValidaAlfanumericos(item) &&
+                !LoginJaExiste(item);
+        }
+
         public void Atualizar(UsuarioDTO usuarioDTO)
         {
             Usuario usuario = mapper.Map<Usuario>(usuarioDTO);
 
             contexto.ChangeTracker.Clear();
-            contexto.Usuarios.Update(usuario);
-            contexto.SaveChanges();
+            if (UsuarioValidations(usuarioDTO))
+            {
+                contexto.Usuarios.Update(usuario);
+                contexto.SaveChanges();
+            }
         }
         public IList<UsuarioDTO> RecuperaListaDeUsuarios()
         {
@@ -84,13 +95,31 @@ namespace DB.AirBDB.DAL.Repository.DAO
 
         public bool ValidaAlfanumericos(UsuarioDTO usuarioDTO)
         {
-            return EhAlfaNumerico(usuarioDTO.Login);
+            if (!EhAlfaNumerico(usuarioDTO.Login))
+            {
+                throw new ArgumentException("Somente letras e números são permitidos no Login.");
+            }
+            return true;
         }
 
         public static bool EhAlfaNumerico(string strToCheck)
         {
             Regex rg = new Regex(@"^[a-zA-Z0-9\s,]*$");
             return rg.IsMatch(strToCheck);
+        }
+
+        public bool LoginJaExiste(UsuarioDTO usuario)
+        {
+            var buscaUsuarios = 
+                contexto.Usuarios.Where(u => u.Login == usuario.Login)
+                    .FirstOrDefault();
+
+            if (buscaUsuarios != null)
+            {
+                throw new ArgumentException("Login indisponível para o cadastro.");
+            }
+
+            return false;
         }
     }
 }

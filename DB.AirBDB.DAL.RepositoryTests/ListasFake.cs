@@ -59,7 +59,7 @@ namespace DB.AirBDB.DAL.RepositoryTests
             new Usuario
            {
                UsuarioId = 1,
-               Login = "Bruce_Kent",
+               Login = "BruceKent",
                Nome = "Bruce Kent",
                Senha = "123456"
            },
@@ -67,7 +67,7 @@ namespace DB.AirBDB.DAL.RepositoryTests
            new Usuario
            {
                UsuarioId = 2,
-               Login = "Marta_Silva",
+               Login = "MartaSilva",
                Nome = "Marta Silva",
                Senha = "654321"
            },
@@ -75,7 +75,7 @@ namespace DB.AirBDB.DAL.RepositoryTests
            new Usuario
            {
                UsuarioId = 3,
-               Login = "Hélio_Lopes",
+               Login = "HelioLopes",
                Nome = "Hélio Lopes",
                Senha = "789456"
            },

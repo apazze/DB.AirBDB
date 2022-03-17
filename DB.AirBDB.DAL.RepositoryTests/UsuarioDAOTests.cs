@@ -52,6 +52,107 @@ namespace DB.AirBDB.DAL.RepositoryTests
 
         }
 
+        [Theory]
+        [InlineData("grgjkj*(&(*93040")]
+        [InlineData("#$%¨&*jsdjgpsdFSDL94950")]
+        [InlineData("alisson.pazze")]
+        [InlineData("alissonpazze.")]
+        [InlineData("@apazze")]
+
+        public void CadastraUsuario_PermiteSomenteAlfaNumericos_RetornaFalse(String login)
+        {
+            //Assert
+            var lista = new ListasFake();
+
+            var contextMock = new Mock<AppDBContext>();
+            contextMock.Object.Usuarios = CreateDbSetMock(lista.Usuarios).Object;
+
+            var configUsuario = new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuarioDTO>().ReverseMap());
+            var mapperUsuario = configUsuario.CreateMapper();
+
+            IUsuarioDAO sut = new UsuarioDAO(contextMock.Object, mapperUsuario);
+
+            var fixture = new Fixture();
+            var usuarioDTO = fixture.Build<UsuarioDTO>()
+                .With(u => u.Login, login)
+                .Create();
+
+            // Act
+            Action act = () => sut.ValidaAlfanumericos(usuarioDTO);
+
+            //Assert
+            act.Should().Throw<ArgumentException>()
+                .WithMessage("Somente letras e números são permitidos no Login.");
+
+        }
+
+        [Theory]
+        [InlineData("BruceKent")]
+        [InlineData("MartaSilva")]
+        [InlineData("HelioLopes")]
+        public void CadastraUsuario_LoginExisteNoBanco_RetornaTrue(String login)
+        {
+
+            //Assert
+            var lista = new ListasFake();
+
+            var contextMock = new Mock<AppDBContext>();
+            contextMock.Object.Usuarios = CreateDbSetMock(lista.Usuarios).Object;
+
+            var configUsuario = new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuarioDTO>().ReverseMap());
+            var mapperUsuario = configUsuario.CreateMapper();
+
+            IUsuarioDAO sut = new UsuarioDAO(contextMock.Object, mapperUsuario);
+
+            var fixture = new Fixture();
+            var usuarioDTO = fixture.Build<UsuarioDTO>()
+                .With(u => u.Login, login)
+                .Create();
+
+            // Act
+            Action act = () => sut.LoginJaExiste(usuarioDTO);
+
+            //Assert
+            act.Should().Throw<ArgumentException>()
+                .WithMessage("Login indisponível para o cadastro.");
+
+        }
+        
+        [Theory]
+        [InlineData("BruceKent1")]
+        [InlineData("Marta1Silva")]
+        [InlineData("1HelioLopes")]
+        public void CadastraUsuario_LoginExisteNoBanco_RetornaFalse(String login)
+        {
+
+            //Assert
+            var lista = new ListasFake();
+
+            var contextMock = new Mock<AppDBContext>();
+            contextMock.Object.Usuarios = CreateDbSetMock(lista.Usuarios).Object;
+
+            var configUsuario = new MapperConfiguration(cfg => cfg.CreateMap<Usuario, UsuarioDTO>().ReverseMap());
+            var mapperUsuario = configUsuario.CreateMapper();
+
+            IUsuarioDAO sut = new UsuarioDAO(contextMock.Object, mapperUsuario);
+
+            var fixture = new Fixture();
+            var usuarioDTO = fixture.Build<UsuarioDTO>()
+                .With(u => u.Login, login)
+                .Create();
+
+            //Act
+
+            var resultado = sut.LoginJaExiste(usuarioDTO);
+
+            //Assert
+            using (new AssertionScope())
+            {
+                resultado.Should().BeFalse();
+            }
+
+        }
+
         private static Mock<DbSet<T>> CreateDbSetMock<T>(IEnumerable<T> elements) where T : class
         {
             var elementsAsQueryable = elements.AsQueryable();

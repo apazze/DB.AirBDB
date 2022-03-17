@@ -11,5 +11,6 @@ namespace DB.AirBDB.DAL.Repository.DAO
         IList<UsuarioDTO> RecuperaListaDeUsuarios();
         UsuarioDTO RecuperaUsuarioPorId(int id);
         bool ValidaAlfanumericos(UsuarioDTO usuario);
+        bool LoginJaExiste(UsuarioDTO usuario);
     }
 }
