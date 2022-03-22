@@ -10,6 +10,12 @@ namespace DB.AirBDB.Common.Utils.Seed
     {
         public string ArquivoEntradaXLSX { get; set; } = "..\\DB.AirBDB.Common.Utils\\Seed\\Dados\\usuarios.xlsx";
         public string ArquivoSaidaJSON { get; set; } = "..\\DB.AirBDB.Common.Utils\\Seed\\Dados\\listaDeUsuarios.json";
+        
+        public GeraListaDeUsuariosJson(string origem, string destino)
+        {
+            ArquivoEntradaXLSX = origem;
+            ArquivoSaidaJSON = destino;
+        }
 
         public void ConversorXLSXParaJson()
         {

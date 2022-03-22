@@ -1,0 +1,602 @@
+[
+  {
+    "Descricao": "Ceará 5305 Andar 6 São Cristóvão TO",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Araguaína",
+    "Valor": 161.0
+  },
+  {
+    "Descricao": "Quatorze 9297 Bloco 3 Planalto MT",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Cuiabá",
+    "Valor": 785.0
+  },
+  {
+    "Descricao": "Brasil 2025 Terreo 1 Santo Antônio CE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Sobral",
+    "Valor": 311.0
+  },
+  {
+    "Descricao": "das Flores 9774 Andar 9 Boa Vista RN",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Mossoró",
+    "Valor": 850.0
+  },
+  {
+    "Descricao": "Minas Gerais 2145 Conjunto 10 Boa Vista RJ",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Duque de Caxias",
+    "Valor": 340.0
+  },
+  {
+    "Descricao": "Projetada 7470 Quadra 7 Planalto AC",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Rio Branco",
+    "Valor": 329.0
+  },
+  {
+    "Descricao": "Um 7603 Fazenda 3 Vila Nova AL",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Maceió",
+    "Valor": 273.0
+  },
+  {
+    "Descricao": "Quinze 9236 Apartamento 3 Industrial ES",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Vila Velha",
+    "Valor": 390.0
+  },
+  {
+    "Descricao": "Paraíba 9140 Cobertura 3 Santo Antônio SE",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Lagarto",
+    "Valor": 295.0
+  },
+  {
+    "Descricao": "Boa Vista 3078 Portão 1 Industrial RN",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "São Gonçalo do Amarante",
+    "Valor": 610.0
+  },
+  {
+    "Descricao": "Quinze 6496 Terreo 7 Planalto PR",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Araucária",
+    "Valor": 539.0
+  },
+  {
+    "Descricao": "São José 3263 Aeroporto 10 Centro PA",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Breves",
+    "Valor": 888.0
+  },
+  {
+    "Descricao": "Santa Maria 8857 Quadra 8 Vila Nova AC",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Rio Branco",
+    "Valor": 846.0
+  },
+  {
+    "Descricao": "Bahia 8412 Galpão 4 Boa Vista BA",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Barreiras",
+    "Valor": 873.0
+  },
+  {
+    "Descricao": "Vinte e Três 848 Casa 6 São Francisco MG",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Passos",
+    "Valor": 113.0
+  },
+  {
+    "Descricao": "Boa Vista 4078 Apartamento 7 Vila Nova RJ",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Nova Friburgo",
+    "Valor": 286.0
+  },
+  {
+    "Descricao": "Espírito Santo 7395 Aeroporto 10 Boa Vista RO",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Ariquemes",
+    "Valor": 436.0
+  },
+  {
+    "Descricao": "São Sebastião 3534 Fundos 3 Vila Nova MT",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Tangará da Serra",
+    "Valor": 709.0
+  },
+  {
+    "Descricao": "São Paulo 7980 Loja 3 Santo Antônio CE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Sobral",
+    "Valor": 985.0
+  },
+  {
+    "Descricao": "Paraná 3680 Fundos 4 Centro RR",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Boa Vista",
+    "Valor": 690.0
+  },
+  {
+    "Descricao": "Espírito Santo 825 Anexo 3 Vila Nova DF",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Brasília",
+    "Valor": 788.0
+  },
+  {
+    "Descricao": "Sete de Setembro 4602 Subsolo 4 Centro SC",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Jaraguá do Sul",
+    "Valor": 486.0
+  },
+  {
+    "Descricao": "Vinte e Quatro 8167 Galeria 1 Planalto CE",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Fortaleza",
+    "Valor": 612.0
+  },
+  {
+    "Descricao": "Bela Vista 6273 Anexo 1 Centro SC",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Florianópolis",
+    "Valor": 158.0
+  },
+  {
+    "Descricao": "Mato Grosso 520 Loja 4 São Francisco ES",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Aracruz",
+    "Valor": 399.0
+  },
+  {
+    "Descricao": "A 6979 Bloco 2 Santo Antônio RN",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Mossoró",
+    "Valor": 291.0
+  },
+  {
+    "Descricao": "Rio de Janeiro 7600 Loja 6 Planalto PI",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Parnaíba",
+    "Valor": 747.0
+  },
+  {
+    "Descricao": "José Bonifácio 9815 Lote 2 Industrial PB",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Campina Grande",
+    "Valor": 979.0
+  },
+  {
+    "Descricao": "Dezessete 7792 Apartamento 7 Vila Nova MA",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Açailândia",
+    "Valor": 546.0
+  },
+  {
+    "Descricao": "Goiás 9509 Conjunto 3 Bela Vista AL",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Maceió",
+    "Valor": 501.0
+  },
+  {
+    "Descricao": "Santa Luzia 8079 Sobreloja 3 Boa Vista RR",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Boa Vista",
+    "Valor": 337.0
+  },
+  {
+    "Descricao": "Sete de Setembro 2755 Bloco 4 Centro AL",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Maceió",
+    "Valor": 192.0
+  },
+  {
+    "Descricao": "Duque de Caxias 2797 Lote 5 São Cristóvão DF",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Brasília",
+    "Valor": 121.0
+  },
+  {
+    "Descricao": "Rui Barbosa 8758 Cobertura 5 Santo Antônio SP",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "São Caetano do Sul",
+    "Valor": 610.0
+  },
+  {
+    "Descricao": "da Paz 253 Sobreloja 10 Centro MT",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Sinop",
+    "Valor": 225.0
+  },
+  {
+    "Descricao": "Vinte 197 Galpão 3 Centro GO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Catalão",
+    "Valor": 880.0
+  },
+  {
+    "Descricao": "Boa Vista 7338 Sala 3 São Cristóvão BA",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Santo Antônio de Jesus",
+    "Valor": 251.0
+  },
+  {
+    "Descricao": "Dois 2796 Fazenda 4 Santo Antônio GO",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Luziânia",
+    "Valor": 234.0
+  },
+  {
+    "Descricao": "Bela Vista 404 Andar 8 Bela Vista PA",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Breves",
+    "Valor": 958.0
+  },
+  {
+    "Descricao": "Principal 1847 Subsolo 8 Boa Vista DF",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Brasília",
+    "Valor": 198.0
+  },
+  {
+    "Descricao": "São Francisco 1111 Galeria 5 Centro GO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Catalão",
+    "Valor": 501.0
+  },
+  {
+    "Descricao": "Paraíba 6829 Terreo 7 Planalto MA",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Codó",
+    "Valor": 146.0
+  },
+  {
+    "Descricao": "Treze de Maio 798 Casa 2 Vila Nova AP",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Santana",
+    "Valor": 960.0
+  },
+  {
+    "Descricao": "São Francisco 4114 Lote 7 São Cristóvão SE",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Aracaju",
+    "Valor": 274.0
+  },
+  {
+    "Descricao": "Minas Gerais 2032 Quadra 8 Centro RS",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Cachoeirinha",
+    "Valor": 390.0
+  },
+  {
+    "Descricao": "Dezesseis 9982 Galpão 4 Industrial CE",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Caucaia",
+    "Valor": 777.0
+  },
+  {
+    "Descricao": "São Luiz 5255 Casa 10 Industrial SE",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Nossa Senhora do Socorro",
+    "Valor": 513.0
+  },
+  {
+    "Descricao": "Santos Dumont 6063 Galeria 1 Santo Antônio DF",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Brasília",
+    "Valor": 418.0
+  },
+  {
+    "Descricao": "Belo Horizonte 4461 Andar 1 Boa Vista PB",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Patos",
+    "Valor": 115.0
+  },
+  {
+    "Descricao": "Onze 1482 Andar 5 Bela Vista RO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Porto Velho",
+    "Valor": 641.0
+  },
+  {
+    "Descricao": "Piauí 3047 Galpão 7 Santo Antônio PR",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Ponta Grossa",
+    "Valor": 109.0
+  },
+  {
+    "Descricao": "Sete de Setembro 1403 Cobertura 4 Bela Vista RS",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Rio Grande",
+    "Valor": 576.0
+  },
+  {
+    "Descricao": "Vitória 9339 Loja 5 Bela Vista RO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Porto Velho",
+    "Valor": 387.0
+  },
+  {
+    "Descricao": "Vinte e Três 2735 Sala 8 São José SP",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Itatiba",
+    "Valor": 443.0
+  },
+  {
+    "Descricao": "Boa Vista 5499 Subsolo 10 Centro RJ",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Petrópolis",
+    "Valor": 215.0
+  },
+  {
+    "Descricao": "Dezoito 8057 Subsolo 6 Vila Nova MG",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Pouso Alegre",
+    "Valor": 757.0
+  },
+  {
+    "Descricao": "Espírito Santo 5172 Lote 4 Centro TO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Palmas",
+    "Valor": 977.0
+  },
+  {
+    "Descricao": "José Bonifácio 3060 Andar 2 Planalto MA",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Caxias",
+    "Valor": 349.0
+  },
+  {
+    "Descricao": "Santa Maria 8818 Lote 6 Bela Vista BA",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Porto Seguro",
+    "Valor": 458.0
+  },
+  {
+    "Descricao": "Um 9029 Andar 2 Planalto PI",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Parnaíba",
+    "Valor": 228.0
+  },
+  {
+    "Descricao": "Minas Gerais 4975 Galeria 8 Bela Vista RO",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Porto Velho",
+    "Valor": 232.0
+  },
+  {
+    "Descricao": "São Luiz 1446 Sala 1 Centro AC",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Rio Branco",
+    "Valor": 613.0
+  },
+  {
+    "Descricao": "Bela Vista 6471 Galeria 1 São Cristóvão TO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Araguaína",
+    "Valor": 388.0
+  },
+  {
+    "Descricao": "Mato Grosso 7105 Portão 10 Santo Antônio RJ",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "São Gonçalo",
+    "Valor": 866.0
+  },
+  {
+    "Descricao": "São Pedro 2247 Andar 10 Vila Nova TO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Palmas",
+    "Valor": 635.0
+  },
+  {
+    "Descricao": "Santa Catarina 3469 Galpão 9 São Francisco RO",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Ariquemes",
+    "Valor": 416.0
+  },
+  {
+    "Descricao": "Brasil 1711 Galpão 5 Industrial PI",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Parnaíba",
+    "Valor": 682.0
+  },
+  {
+    "Descricao": "Sete de Setembro 6711 Bloco 2 São Francisco SP",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Itanhaém",
+    "Valor": 317.0
+  },
+  {
+    "Descricao": "Principal 5767 Cobertura 1 Bela Vista RN",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "São Gonçalo do Amarante",
+    "Valor": 695.0
+  },
+  {
+    "Descricao": "Boa Vista 3027 Terreo 4 Industrial RO",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Ji-Paraná",
+    "Valor": 557.0
+  },
+  {
+    "Descricao": "Dom Pedro II 5481 Fundos 1 São Cristóvão SE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Lagarto",
+    "Valor": 348.0
+  },
+  {
+    "Descricao": "Castro Alves 2796 Apartamento 6 Centro AM",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Manaus",
+    "Valor": 972.0
+  },
+  {
+    "Descricao": "Um 4127 Galeria 1 Bela Vista SC",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Chapecó Chapecó",
+    "Valor": 335.0
+  },
+  {
+    "Descricao": "Sete de Setembro 4927 Bloco 9 Vila Nova PR",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Cambé",
+    "Valor": 932.0
+  },
+  {
+    "Descricao": "Vinte 894 Fundos 10 Centro SC",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Itajaí",
+    "Valor": 690.0
+  },
+  {
+    "Descricao": "Vitória 5082 Fazenda 2 Santo Antônio RJ",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Resende",
+    "Valor": 925.0
+  },
+  {
+    "Descricao": "Santa Maria 712 Apartamento 7 Boa Vista PR",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Umuarama",
+    "Valor": 269.0
+  },
+  {
+    "Descricao": "Treze 4420 Loja 4 Boa Vista PI",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Parnaíba",
+    "Valor": 173.0
+  },
+  {
+    "Descricao": "Alagoas 9675 Fazenda 3 Boa Vista SE",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Aracaju",
+    "Valor": 641.0
+  },
+  {
+    "Descricao": "Vinte e Quatro 1265 Fundos 8 Centro PR",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Foz do Iguaçu",
+    "Valor": 944.0
+  },
+  {
+    "Descricao": "Maranhão 1526 Fundos 10 São Cristóvão RN",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "São Gonçalo do Amarante",
+    "Valor": 144.0
+  },
+  {
+    "Descricao": "Vitória 4103 Galpão 8 Boa Vista CE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Iguatu",
+    "Valor": 257.0
+  },
+  {
+    "Descricao": "São José 4020 Sala 10 Centro BA",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Itabuna",
+    "Valor": 330.0
+  },
+  {
+    "Descricao": "Belo Horizonte 3571 Bloco 9 São Cristóvão PB",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Santa Rita",
+    "Valor": 638.0
+  },
+  {
+    "Descricao": "Treze 1004 Cobertura 8 São Francisco RO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Ji-Paraná",
+    "Valor": 957.0
+  },
+  {
+    "Descricao": "Tiradentes 1560 Lote 3 Centro CE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Fortaleza",
+    "Valor": 468.0
+  },
+  {
+    "Descricao": "Castro Alves 3033 Aeroporto 7 São Francisco RO",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Ji-Paraná",
+    "Valor": 788.0
+  },
+  {
+    "Descricao": "Onze 9893 Sobreloja 9 São Francisco RR",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Boa Vista",
+    "Valor": 180.0
+  },
+  {
+    "Descricao": "Vinte e Três 5006 Subsolo 1 São José BA",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Feira de Santana",
+    "Valor": 550.0
+  },
+  {
+    "Descricao": "Piauí 1719 Apartamento 9 Planalto PR",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Guarapuava",
+    "Valor": 897.0
+  },
+  {
+    "Descricao": "Santos Dumont 4002 Bloco 4 Vila Nova MG",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Passos",
+    "Valor": 138.0
+  },
+  {
+    "Descricao": "Dezesseis 2736 Sala 10 São Francisco SP",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Jundiaí",
+    "Valor": 620.0
+  },
+  {
+    "Descricao": "Vinte e Quatro 6143 Fundos 6 São José RR",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Boa Vista",
+    "Valor": 925.0
+  },
+  {
+    "Descricao": "Maranhão 1118 Conjunto 8 Boa Vista DF",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Brasília",
+    "Valor": 491.0
+  },
+  {
+    "Descricao": "Santa Luzia 1841 Conjunto 2 Boa Vista PI",
+    "TipoDeAcomodacao": "Apartamento",
+    "Cidade": "Parnaíba",
+    "Valor": 819.0
+  },
+  {
+    "Descricao": "Sete de Setembro 5130 Galeria 2 Santo Antônio MT",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Tangará da Serra",
+    "Valor": 704.0
+  },
+  {
+    "Descricao": "Pernambuco 8384 Fazenda 8 São Cristóvão PI",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Teresina",
+    "Valor": 868.0
+  },
+  {
+    "Descricao": "São Jorge 5207 Anexo 7 Vila Nova RO",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Porto Velho",
+    "Valor": 104.0
+  },
+  {
+    "Descricao": "Pará 4952 Andar 10 São Francisco CE",
+    "TipoDeAcomodacao": "Casa",
+    "Cidade": "Caucaia",
+    "Valor": 323.0
+  },
+  {
+    "Descricao": "Quatorze 3973 Subsolo 3 Santo Antônio ES",
+    "TipoDeAcomodacao": "Quarto",
+    "Cidade": "Guarapari",
+    "Valor": 512.0
+  }
+]
